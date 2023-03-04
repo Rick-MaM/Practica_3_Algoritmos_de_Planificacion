@@ -1,18 +1,20 @@
 import time 
+from tkinter import *
 
 class planning:
 
-    def __init__(self):
-        pass
+    def __init__(self,windows):
+        self.Windows = windows
+        self.Windows.title("Algoritmo de Planificacion")
+        self.Windows.geometry("400x400")
+        self.File()
 
     def File(self):
-        with open("procesos.txt","r") as file:
-            file = file.readlines()
-        return file
-    
-    
-    
+        with open("procesos.txt","r") as self.file:
+            self.file = self.file.readlines()
 
-proceso = planning()
-file = proceso.File()
-print(file[1])
+    
+if __name__=="__main__":
+    root=Tk()
+    aplicacion = planning(root)
+    root.mainloop()

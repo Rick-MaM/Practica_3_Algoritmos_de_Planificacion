@@ -1,8 +1,7 @@
 import time 
 from tkinter import *
 
-class planning:
-
+class Process:
     def __init__(self):
         self.File()
 
@@ -11,14 +10,40 @@ class planning:
             self.file = self.file.readlines()
     
     def FIFO(self):
-        while len(self.file) != 0:
-            process = self.file[0].split(",")
+        aux_file = self.file
+        while len(aux_file) != 0:
+            process = aux_file[0].split(",")
             print("Proceso: ", process[0], "------> ",end="")
             for count in range(int(process[2])):
                 print(".", end="")
                 time.sleep(1)
             print("Completado")
-            self.file.pop(0)
+            aux_file.pop(0)
+    
+    def process_priority(self):
+        last_process = 0
+        for count_limit in range(len(self.file)):
+            process = self.file[count_limit].split(",")
+            if int(process[1]) > last_process:
+                last_process = int(process[1])
+        return last_process
+    
+    def Prioridad(self):
+        aux_file = self.file
+        count_process = 0
+        while count_process <= self.process_priority():
+            for count in range(len(aux_file)):
+                process = aux_file[count].split(",")
+                if int(process[1]) == count_process:
+                    time.sleep(int(process[2]))
+                    print("Proceso: ", process[0], "------> ", count_process)
+            count_process += 1
 
-proceso = planning()
-proceso.FIFO()
+            
+        
+
+
+
+
+proceso = Process()
+proceso.Prioridad()

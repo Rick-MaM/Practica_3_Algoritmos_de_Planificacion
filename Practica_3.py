@@ -28,22 +28,15 @@ class Process:
                 last_process = int(process[1])
         return last_process
     
-    def Prioridad(self):
-        aux_file = self.file
+    def Priority(self):
         count_process = 0
         while count_process <= self.process_priority():
-            for count in range(len(aux_file)):
-                process = aux_file[count].split(",")
+            for count in range(len(self.file)):
+                process = self.file[count].split(",")
                 if int(process[1]) == count_process:
                     time.sleep(int(process[2]))
-                    print("Proceso: ", process[0], "------> ", count_process)
+                    print("Proceso: ", process[0], "------> Completado")
             count_process += 1
 
-            
-        
-
-
-
-
 proceso = Process()
-proceso.Prioridad()
+proceso.Priority()

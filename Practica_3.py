@@ -8,6 +8,25 @@ class Process:
     def File(self):
         with open("procesos.txt","r") as self.file:
             self.file = self.file.readlines()
+    
+    def Round_Robin(self):
+        quantum = 3
+        while len(self.file) != 0:
+            process = self.file[0].split(",")
+            time_process = int(process[2])
+            for count_time in range(quantum):
+                if time_process == 0:
+                    break
+                else:
+                    time_process -= 1
+                time.sleep(1)
+            if time_process > 0:
+                print("Proceso: ", process[0], "------> ",time_process)
+                self.file.append(process[0]+", "+process[1]+", "+str(time_process))
+            else:
+                print("Proceso: ", process[0], "------> Completado")
+
+            self.file.pop(0)
 
     def SJF(self):
         for count_process in range (len(self.file)):
@@ -48,4 +67,4 @@ class Process:
             count_process += 1
 
 proceso = Process()
-proceso.SJF()
+proceso.Round_Robin()

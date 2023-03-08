@@ -11,8 +11,9 @@ class Process:
     
     def Round_Robin(self):
         quantum = 3
-        while len(self.file) != 0:
-            process = self.file[0].split(",")
+        file = self.file
+        while len(file) != 0:
+            process = file[0].split(",")
             time_process = int(process[2])
             for count_time in range(quantum):
                 if time_process == 0:
@@ -22,11 +23,11 @@ class Process:
                 time.sleep(1)
             if time_process > 0:
                 print("Proceso: ", process[0], "------> ",time_process)
-                self.file.append(process[0]+", "+process[1]+", "+str(time_process))
+                file.append(process[0]+", "+process[1]+", "+str(time_process))
             else:
                 print("Proceso: ", process[0], "------> Completado")
 
-            self.file.pop(0)
+            file.pop(0)
 
     def SJF(self):
         for count_process in range (len(self.file)):

@@ -26,17 +26,32 @@ class Process:
                 file.append(process[0]+", "+process[1]+", "+str(time_process))
             else:
                 print("Proceso: ", process[0], "------> Completado")
-
             file.pop(0)
 
+    def shoter_time(self,list_SJF):
+        Time = []
+        for count_time in range(len(list_SJF)):
+            process = list_SJF[count_time].split(",")
+            Time.append(int(process[2]))
+        Time.sort()
+        return Time
+
     def SJF(self):
-        for count_process in range (len(self.file)):
-            for count_time in range (len(self.file)):
-                process = self.file[count_time].split(",")
-                if int(process[2]) == count_process:
-                    time.sleep(int(process[2]))
-                    print("Proceso: ", process[0],
-                          "------> Completado", "------> Tiempo: ",int(process[2]))
+        aux_file = self.file
+        times = self.shoter_time(aux_file)
+        while len(times) != 0:
+            for count_process in range(len(aux_file)):
+                process = aux_file[count_process].split(",")
+                if times[0] == int(process[2]):
+                    print("Proceso: ",process[0], "------> ",end="")
+                    for count in range(times[0]):
+                        time.sleep(1)
+                        print(".",end="")
+                    print("completado")
+                    break
+            times.pop(0)
+
+            
             
     def FIFO(self):
         aux_file = self.file
@@ -68,4 +83,4 @@ class Process:
             count_process += 1
 
 proceso = Process()
-proceso.Round_Robin()
+proceso.SJF()

@@ -15,17 +15,19 @@ class Process:
         while len(file) != 0:
             process = file[0].split(",")
             time_process = int(process[2])
+            print("Proceso: ", process[0], "----- ->",end="")
             for count_time in range(quantum):
                 if time_process == 0:
                     break
                 else:
                     time_process -= 1
                 time.sleep(1)
+                print(".",end="")
             if time_process > 0:
                 print("Proceso: ", process[0], "------> ",time_process)
                 file.append(process[0]+", "+process[1]+", "+str(time_process))
             else:
-                print("Proceso: ", process[0], "------> Completado")
+                print("Completado")
             file.pop(0)
 
     def shoter_time(self,list_SJF):
@@ -92,4 +94,13 @@ class Process:
             list_priority.pop(0)
 
 proceso = Process()
+"""
+print("-----> Round Robin <-----")
+proceso.Round_Robin()
+print("-----> SJF <-----")
+proceso.SJF()
+print("-----> FIFO <-----")
+proceso.FIFO()
+"""
+print("-----> Prioridad <-----")
 proceso.priority()

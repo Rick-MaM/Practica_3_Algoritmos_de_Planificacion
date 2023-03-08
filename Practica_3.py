@@ -39,8 +39,9 @@ class Process:
     def SJF(self):
         aux_file = self.file
         times = self.shoter_time(aux_file)
-        while len(times) != 0:
-            for count_process in range(len(aux_file)):
+        number_process = len(aux_file)
+        while len(aux_file) != 0:
+            for count_process in range(number_process+1):
                 process = aux_file[count_process].split(",")
                 if times[0] == int(process[2]):
                     print("Proceso: ",process[0], "------> ",end="")
@@ -49,10 +50,10 @@ class Process:
                         print(".",end="")
                     print("completado")
                     break
+            aux_file.pop(count_process)
+            number_process = len(aux_file)
             times.pop(0)
-
-            
-            
+  
     def FIFO(self):
         aux_file = self.file
         while len(aux_file) != 0:

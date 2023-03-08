@@ -65,13 +65,13 @@ class Process:
             print("Completado")
             aux_file.pop(0)
     
-    def process_priority(self):
-        last_process = 0
-        for count_limit in range(len(self.file)):
-            process = self.file[count_limit].split(",")
-            if int(process[1]) > last_process:
-                last_process = int(process[1])
-        return last_process
+    def process_priority(self,list_priority):
+        number_priority = []
+        for count_time in range(len(list_priority)):
+            process = list_priority[count_time].split(",")
+            number_priority.append(int(process[1]))
+        number_priority.sort()
+        return number_priority
     
     def Priority(self):
         count_process = 0

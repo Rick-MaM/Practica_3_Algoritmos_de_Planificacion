@@ -24,7 +24,7 @@ class Process:
                 time.sleep(1)
                 print(".",end="")
             if time_process > 0:
-                print("Proceso: ", process[0], "------> ",time_process)
+                print(time_process)
                 self.file.append(process[0]+", "+process[1]+", "+str(time_process))
             else:
                 print("Completado")
@@ -57,7 +57,7 @@ class Process:
             times.pop(0)
   
     def FIFO(self):
-        self.Fiel()
+        self.File()
         while len(self.file) != 0:
             process = self.file[0].split(",")
             print("Proceso: ", process[0], "------> ",end="")

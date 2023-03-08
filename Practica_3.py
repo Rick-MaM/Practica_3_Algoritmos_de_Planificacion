@@ -73,15 +73,23 @@ class Process:
         number_priority.sort()
         return number_priority
     
-    def Priority(self):
-        count_process = 0
-        while count_process <= self.process_priority():
-            for count in range(len(self.file)):
-                process = self.file[count].split(",")
-                if int(process[1]) == count_process:
-                    time.sleep(int(process[2]))
-                    print("Proceso: ", process[0], "------> Completado")
-            count_process += 1
+    def priority(self):
+        aux_file = self.file
+        list_priority = self.process_priority(aux_file)
+        number_process = len(aux_file)
+        while len(aux_file) != 0:
+            for count_process in range(number_process+1):
+                process = aux_file[count_process].split(",")
+                if list_priority[0] == int(process[1]):
+                    print("Proceso: ", process[0], "------> ", end="")
+                    for count in range(int(process[2])):
+                        time.sleep(1)
+                        print(".", end="")
+                    print("completado")
+                    break
+            aux_file.pop(count_process)
+            number_process = len(aux_file)
+            list_priority.pop(0)
 
 proceso = Process()
-proceso.SJF()
+proceso.priority()

@@ -2,19 +2,23 @@ import time
 
 class Process:
     def __init__(self):
-        self.File()
+        self.Round_Robin()
+        self.SJF()
+        self.FIFO()
+        self.priority()
 
     def File(self):
         with open("procesos.txt","r") as self.file:
             self.file = self.file.readlines()
     
     def Round_Robin(self):
+        print("========> Round Robin <========")
         quantum = 3
         self.File()
         while len(self.file) != 0:
             process = self.file[0].split(",")
             time_process = int(process[2])
-            print("Proceso: ", process[0], "----- ->",end="")
+            print("Proceso: ", process[0], "------>",end="")
             for count_time in range(quantum):
                 if time_process == 0:
                     break
@@ -23,7 +27,7 @@ class Process:
                 time.sleep(1)
                 print(".",end="")
             if time_process > 0:
-                print(time_process)
+                print("----> ",time_process)
                 self.file.append(process[0]+", "+process[1]+", "+str(time_process))
             else:
                 print("Completado")
@@ -38,6 +42,7 @@ class Process:
         return Time
 
     def SJF(self):
+        print("========> SJF <========")
         self.File()
         times = self.shoter_time(self.file)
         number_process = len(self.file)
@@ -56,6 +61,7 @@ class Process:
             times.pop(0)
   
     def FIFO(self):
+        print("========> FIFO <========")
         self.File()
         while len(self.file) != 0:
             process = self.file[0].split(",")
@@ -75,6 +81,7 @@ class Process:
         return number_priority
     
     def priority(self):
+        print("========> Prioridad <========")
         self.File()
         list_priority = self.process_priority(self.file)
         number_process = len(self.file)
@@ -92,13 +99,4 @@ class Process:
             number_process = len(self.file)
             list_priority.pop(0)
 
-proceso = Process()
-
-print("-----> Round Robin <-----")
-proceso.Round_Robin()
-print("-----> SJF <-----")
-proceso.SJF()
-print("-----> FIFO <-----")
-proceso.FIFO()
-print("-----> Prioridad <-----")
-proceso.priority()
+procesos_planificacion = Process()

@@ -1,5 +1,4 @@
 import time 
-from tkinter import *
 
 class Process:
     def __init__(self):
